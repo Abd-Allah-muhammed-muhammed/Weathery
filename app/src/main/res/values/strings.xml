@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name" translatable="false">Weathery</string>
+    <string name="my_location">My location</string>
+    <string name="another_location">Another location</string>
+    <string name="try_again">try again later</string>
+</resources>
