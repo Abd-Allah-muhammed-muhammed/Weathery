@@ -3,4 +3,5 @@
     <string name="my_location">موقعي</string>
     <string name="another_location">موقع اخر</string>
     <string name="try_again">try again later</string>
+    <string name="check_internet">\"Please check your internet first and try again \"</string>
 </resources>

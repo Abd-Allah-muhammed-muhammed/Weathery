@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data >
+
+        <variable
+            name="data"
+            type="com.abdallah.weathery.model.weather_info.WeatherResponse" />
+    </data>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.description.DescriptionFragment">
+
+
+        <TextView
+            android:textSize="@dimen/_14ssp"
+            android:id="@+id/name_of_erea"
+            android:fontFamily="@font/helvet_bold"
+            android:textColor="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="@{data.name}"/>
+
+        <LinearLayout
+            android:layout_below="@+id/name_of_erea"
+            android:id="@+id/layout_temp"
+            android:layoutDirection="ltr"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:src="@drawable/ic_sunny"
+                    android:id="@+id/icon_temp"/>
+                <TextView
+                    android:layout_marginTop="-15dp"
+                    android:fontFamily="@font/helvet_bold"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_below="@+id/layout_temp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.weather.get(0).description.toString()}"/>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_25ssp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.main.temp.toString()}"/>
+
+            <TextView
+                android:layout_marginStart="-15dp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_25ssp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ºC"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_marginTop="@dimen/_4sdp"
+            android:id="@+id/line_one"
+            android:layout_below="@+id/layout_temp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        <LinearLayout
+            android:id="@+id/info_layout_one"
+            android:layoutDirection="ltr"
+            android:layout_margin="@dimen/_4sdp"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@+id/line_one"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:fontFamily="@font/helvet"
+                android:layout_marginStart="@dimen/_47sdp"
+                android:drawablePadding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_24sdp"
+                android:text="@{data.main.pressure.toString()}"
+                android:drawableStart="@drawable/ic_pressuer_yellow"/>
+
+
+            <TextView
+                android:fontFamily="@font/helvet"
+
+                android:drawablePadding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_24sdp"
+                android:text="@{data.main.humidity.toString()}"
+                android:drawableStart="@drawable/ic_humidity"/>
+
+
+            <TextView
+                android:fontFamily="@font/helvet"
+
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_24sdp"
+                android:text="@{data.wind.speed.toString()}"
+                android:drawableStart="@drawable/ic_wind_speed"/>
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="@dimen/_4sdp"
+            android:id="@+id/line_tow"
+            android:layout_below="@+id/info_layout_one"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+
+        <LinearLayout
+            android:id="@+id/info_layout_tow"
+            android:layoutDirection="ltr"
+            android:layout_margin="@dimen/_4sdp"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@+id/line_tow"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center"
+
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sunrise"/>
+
+                <TextView
+                    android:fontFamily="@font/helvet"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:text="@{data.sys.sunrise.toString()}"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_sunset"/>
+
+                <TextView
+                    android:fontFamily="@font/helvet"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_40sdp"
+                    android:text="@{data.sys.sunset.toString()}"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+        <View
+
+            android:layout_below="@+id/info_layout_tow"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:id="@+id/line_three"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/info_layout_three"
+            android:layoutDirection="ltr"
+            android:layout_margin="@dimen/_4sdp"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@+id/line_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:fontFamily="@font/helvet"
+                android:layout_marginStart="@dimen/_47sdp"
+                android:drawablePadding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_24sdp"
+                android:text="@{data.timezone.toString()}"
+                android:drawableStart="@drawable/ic_time_zone"/>
+
+
+
+            <TextView
+                android:fontFamily="@font/helvet"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_4sdp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_24sdp"
+                android:text="@{data.main.feelsLike.toString()}"
+                android:drawableStart="@drawable/ic_time_zone"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

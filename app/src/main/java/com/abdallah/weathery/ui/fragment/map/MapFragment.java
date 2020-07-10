@@ -7,12 +7,14 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +34,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import static com.abdallah.weathery.utils.Constant.MY_ZOOM;
+import static com.abdallah.weathery.utils.StaticMethods.isNetworkAvailable;
 
 public class MapFragment extends Fragment {
-
 
     private FragmentMapBinding binding;
     private MapViewModel viewModel;
@@ -43,25 +45,16 @@ public class MapFragment extends Fragment {
     private FusedLocationProviderClient fusedLocationClient;
     private GoogleMap map;
 
-
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
         @SuppressLint("MissingPermission")
         @Override
         public void onMapReady(GoogleMap googleMap) {
           map = googleMap;
-
             if (locationPermissionGranted) {
-
                 viewModel.getMyLocation(fusedLocationClient, getActivity(), map);
-
             }else {
-
                 getLocationPermission();
             }
-
-
-
 
         }
 
@@ -84,22 +77,17 @@ public class MapFragment extends Fragment {
         binding.btnMyLocation.setOnClickListener(view -> {
 
             viewModel.getMyLocation(fusedLocationClient, getActivity(), map);
-
-            Toast.makeText(getActivity(), ""+viewModel.getMyLatLong().toString(), Toast.LENGTH_SHORT).show();
+            goToResult(viewModel.getMyLatLong(),view);
 
         });
 
         binding.btnAnotherLocation.setOnClickListener(view -> {
 
-            Toast.makeText(getActivity(), ""+viewModel.getLatLong().toString(), Toast.LENGTH_SHORT).show();
+            goToResult(viewModel.getLatLong(),view);
 
 
         });
     }
-
-
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -111,17 +99,7 @@ public class MapFragment extends Fragment {
         }
         viewModel = new ViewModelProvider(this).get(MapViewModel.class);
 
-
     }
-
-
-
-
-
-
-
-
-
 
     private void getLocationPermission() {
 
@@ -135,7 +113,6 @@ public class MapFragment extends Fragment {
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -153,7 +130,24 @@ public class MapFragment extends Fragment {
 
             }
 
+    private void goToResult(LatLng latLng , View view){
 
+        if (isNetworkAvailable(getActivity())){
+
+            Bundle bundle = new Bundle();
+            bundle.putDouble("latitude",latLng.latitude);
+            bundle.putDouble("longitude",latLng.longitude);
+            Navigation.findNavController(view).navigate(R.id.action_mapFragment_to_descriptionragment, bundle);
+        }else {
+
+            Toast.makeText(getActivity(), getString(R.string.check_internet), Toast.LENGTH_LONG).show();
         }
+
+
+
+    }
+
+
+}
 //
 
