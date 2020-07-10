@@ -3,5 +3,13 @@
     <string name="my_location">موقعي</string>
     <string name="another_location">موقع اخر</string>
     <string name="try_again">try again later</string>
-    <string name="check_internet">\"Please check your internet first and try again \"</string>
+    <string name="check_internet">من فضلك تحقق من الانترنت واعد المحاوله</string>
+    <string name="time_zone">Time Zone</string>
+    <string name="feels_like">Feels like</string>
+    <string name="save">حفظ</string>
+    <string name="saved_saccessful">تم الحفظ بنجاح</string>
+    <string name="saved">المحفوظات</string>
+    <string name="allow_location">السماح للوصول الي الموقع</string>
+    <string name="click_to_return">اضغط للعوده</string>
+
 </resources>

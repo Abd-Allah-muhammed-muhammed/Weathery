@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data >
+
+        <variable
+            name="data"
+            type="com.abdallah.weathery.model.weather_local_room.Weather" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="@dimen/_8sdp"
+            android:id="@+id/name_of_erea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvet_bold"
+            android:gravity="center"
+            android:text="@{data.areaName}"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_14ssp" />
+
+        <LinearLayout
+            android:id="@+id/layout_temp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_of_erea"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/icon_temp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                     />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-15dp"
+                    android:fontFamily="@font/helvet_bold"
+                    android:gravity="center"
+                    android:text="@{data.description}"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_12sdp" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.temp.toString()}"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_25ssp" />
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-15dp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/helvet"
+                android:text=" ºC"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_25ssp" />
+
+
+
+
+            <LinearLayout
+                android:id="@+id/info_layout_one"
+                android:layoutDirection="ltr"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:fontFamily="@font/helvet"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:text="@{data.pressure.toString()}"
+                    android:drawableStart="@drawable/ic_pressure"/>
+
+
+                <TextView
+                    android:fontFamily="@font/helvet"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_24sdp"
+                    android:text="@{data.humidity.toString()}"
+                    android:drawableStart="@drawable/ic_humidity"/>
+
+
+                <TextView
+                    android:fontFamily="@font/helvet"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_24sdp"
+                    android:text="@{data.speed.toString()}"
+                    android:drawableStart="@drawable/ic_wind_speed"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="@dimen/_4sdp"
+            android:id="@+id/line_one"
+            android:layout_below="@+id/layout_temp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+
+    </RelativeLayout>
+
+</layout>

@@ -46,7 +46,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 
-
     // Auto dimensions
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
@@ -71,7 +70,20 @@ dependencies {
 
     implementation "com.google.android.gms:play-services-location:17.0.0"
 
+    // animation lottie
+    implementation 'com.airbnb.android:lottie:3.0.5'
 
+     def room_version = "2.2.5"
 
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
 
+    // optional - RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+    
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    // Progress animation
+    implementation 'com.agrawalsuneet.androidlibs:squareloaderspack:0.5'
 }

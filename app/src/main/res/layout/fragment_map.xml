@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
     <RelativeLayout
@@ -32,19 +32,22 @@
             <Button
                 android:layout_gravity="center"
 
+                android:visibility="gone"
                 android:id="@+id/btn_another_location"
                 android:fontFamily="@font/helvet_bold"
                 android:text="@string/another_location"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:background="@drawable/bg_btn"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"/>
 
 
             <Button
+                android:visibility="gone"
+
                 android:id="@+id/btn_my_location"
                 android:fontFamily="@font/helvet_bold"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:text="@string/my_location"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_gravity="center"
@@ -54,6 +57,55 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/li_save"
+            android:layout_margin="@dimen/_8sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/ic_save"/>
+
+
+            <TextView
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/helvet_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saved"/>
+        </LinearLayout>
+
+
+        <RelativeLayout
+
+            android:background="@color/white"
+            android:id="@+id/li_no_intenet"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.airbnb.lottie.LottieAnimationView
+                app:lottie_rawRes="@raw/lotti_no_connection"
+
+                android:id="@+id/img_no_internet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <TextView
+                android:fontFamily="@font/helvet_bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="@dimen/_70sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center"
+                android:text="@string/click_to_return"/>
+
+        </RelativeLayout>
 
 
     </RelativeLayout>

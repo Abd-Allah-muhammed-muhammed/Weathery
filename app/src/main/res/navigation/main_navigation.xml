@@ -19,10 +19,22 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_mapFragment_to_savedWeatherFragment"
+            app:destination="@id/savedWeatherFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/descriptionragment"
         android:name="com.abdallah.weathery.ui.fragment.description.DescriptionFragment"
         android:label="descriptionragment_fragment"
         tools:layout="@layout/descriptionragment_fragment" />
+    <fragment
+        android:id="@+id/savedWeatherFragment"
+        android:name="com.abdallah.weathery.ui.fragment.saved_weather.SavedWeatherFragment"
+        android:label="saved_weather_fragment"
+        tools:layout="@layout/saved_weather_fragment" />
 </navigation>

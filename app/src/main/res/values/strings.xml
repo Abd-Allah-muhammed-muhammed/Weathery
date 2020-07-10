@@ -3,5 +3,12 @@
     <string name="my_location">My location</string>
     <string name="another_location">Another location</string>
     <string name="try_again">try again later</string>
-    <string name="check_internet">\"Please check your internet first and try again \"</string>
+    <string name="check_internet">Please check your internet first and try again</string>
+    <string name="time_zone">Time Zone</string>
+    <string name="feels_like">Feels like</string>
+    <string name="save">Save</string>
+    <string name="saved_saccessful">saved successful</string>
+    <string name="saved">Saved</string>
+    <string name="allow_location">اAllow location permeation</string>
+    <string name="click_to_return">click to return</string>
 </resources>

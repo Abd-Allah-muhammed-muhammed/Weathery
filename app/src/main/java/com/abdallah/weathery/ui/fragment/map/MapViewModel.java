@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.abdallah.weathery.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +32,7 @@ public class MapViewModel extends ViewModel {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions
                 .position(latLng1)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
                 .draggable(true);
         map.addMarker(markerOptions);
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng1));
@@ -41,8 +44,10 @@ public class MapViewModel extends ViewModel {
 
 
     @SuppressLint("MissingPermission")
-    public void getMyLocation(FusedLocationProviderClient fusedLocationClient, Activity activity, GoogleMap map){
+    public void getMyLocation( Activity activity, GoogleMap map){
 
+
+        FusedLocationProviderClient   fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(activity, new OnSuccessListener<Location>() {
