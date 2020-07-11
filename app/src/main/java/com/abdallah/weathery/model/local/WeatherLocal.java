@@ -1,4 +1,4 @@
-package com.abdallah.weathery.model.weather_local_room;
+package com.abdallah.weathery.model.local;
 
 
 import androidx.room.ColumnInfo;
@@ -6,9 +6,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Weather {
+public class WeatherLocal {
 
-    public Weather() {
+    public WeatherLocal() {
     }
 
 
@@ -50,7 +50,7 @@ public class Weather {
 
 
          @ColumnInfo(name = "timezone")
-    public Integer timezone;
+    public String timezone;
 
          @ColumnInfo(name = "feelsLike")
     public Double feelsLike;
@@ -128,11 +128,11 @@ public class Weather {
         this.sunset = sunset;
     }
 
-    public Integer getTimezone( ) {
+    public String getTimezone( ) {
         return timezone;
     }
 
-    public void setTimezone(Integer timezone) {
+    public void setTimezone(String timezone) {
         this.timezone = timezone;
     }
 

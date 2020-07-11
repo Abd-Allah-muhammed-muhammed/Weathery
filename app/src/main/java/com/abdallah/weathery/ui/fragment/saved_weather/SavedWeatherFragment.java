@@ -59,11 +59,8 @@ public class SavedWeatherFragment extends Fragment {
 
             if (!weathers.isEmpty()){
 
-
                 weatherAdapter.setMyWeather(weathers);
             }else {
-
-
 
                 binding.liNodata.setVisibility(View.VISIBLE);
             }

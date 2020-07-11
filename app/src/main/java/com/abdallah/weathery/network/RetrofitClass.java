@@ -20,12 +20,7 @@ public class RetrofitClass {
 
     private static NetworkInterface networkInstance;
 
-    public static void setUserToken(String userToken) {
-        RetrofitClass.userToken = userToken;
-        networkInstance = null;
-    }
 
-    private static String userToken;
 
     public static NetworkInterface getNetworkInstance() {
 
@@ -38,7 +33,6 @@ public class RetrofitClass {
                     .log(Platform.INFO)
                     .request("Request")
                     .response("Response")
-                    .addQueryParam("api_token", userToken)
                     .addHeader("version", BuildConfig.VERSION_NAME)
                     .build();
 
@@ -68,7 +62,6 @@ public class RetrofitClass {
     }
 
 
-    private static NetworkInterface nonTokenNetwork;
 
 
 

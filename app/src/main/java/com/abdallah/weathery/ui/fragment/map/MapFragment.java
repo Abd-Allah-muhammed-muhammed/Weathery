@@ -2,7 +2,6 @@ package com.abdallah.weathery.ui.fragment.map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -16,13 +15,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.abdallah.weathery.R;
 import com.abdallah.weathery.databinding.FragmentMapBinding;
 import com.abdallah.weathery.utils.PrefManager;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -30,30 +27,16 @@ import com.google.android.gms.maps.model.LatLng;
 
 import static com.abdallah.weathery.utils.StaticMethods.isNetworkAvailable;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private FragmentMapBinding binding;
     private MapViewModel viewModel;
     private int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 132;
     private boolean locationPermissionGranted;
     private GoogleMap map;
-    private PrefManager prefManager ;
+    private PrefManager prefManager;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
-        @SuppressLint("MissingPermission")
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-          map = googleMap;
 
-            if (locationPermissionGranted) {
-                viewModel.getMyLocation( getActivity(), map);
-            }else {
-                getLocationPermission();
-            }
-
-        }
-
-    };
 
     @Nullable
     @Override
@@ -62,26 +45,31 @@ public class MapFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
         prefManager = new PrefManager(getActivity());
-   getLocationPermission();
+        // check Permission
+        getLocationPermission();
+
         handelClicks();
         return binding.getRoot();
     }
 
+
+
     @SuppressLint("MissingPermission")
     private void handelClicks( ) {
         binding.btnMyLocation.setOnClickListener(view -> {
-            if (locationPermissionGranted){
-                viewModel.getMyLocation( getActivity(), map);
-                goToResult(viewModel.getMyLatLong(),view);
-            }else {
+            if (locationPermissionGranted) {
+                viewModel.getMyLocation(getActivity(), map,binding.btnAnotherLocation);
+                goToResult(viewModel.getMyLatLong(), view);
+            } else {
                 getLocationPermission();
             }
 
         });
 
         binding.btnAnotherLocation.setOnClickListener(view -> {
-            if (locationPermissionGranted){
-                goToResult(viewModel.getLatLong(),view); }
+            if (locationPermissionGranted) {
+                goToResult(viewModel.getLatLong(), view);
+            }
         });
 
         binding.liSave.setOnClickListener(view -> {
@@ -96,6 +84,7 @@ public class MapFragment extends Fragment {
 
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -103,75 +92,72 @@ public class MapFragment extends Fragment {
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
-            mapFragment.getMapAsync(callback);
+            mapFragment.getMapAsync(this);
         }
 
 
     }
 
-    private void getLocationPermission() {
+
+    private void getLocationPermission( ) {
 
         if (ContextCompat.checkSelfPermission(getContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             locationPermissionGranted = true;
             binding.btnMyLocation.setVisibility(View.VISIBLE);
-            binding.btnAnotherLocation.setVisibility(View.VISIBLE);
 
         } else {
 
             requestPermissions(new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION );
+                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 
-        Toast.makeText(getContext(), "dffd", Toast.LENGTH_SHORT).show();
-          if (requestCode==PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION){
-              // If request is cancelled, the result arrays are empty.
-              if (grantResults.length > 0
-                      && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                  locationPermissionGranted = true;
-                  viewModel.getMyLocation( getActivity(), map);
+        if (requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                locationPermissionGranted = true;
+                viewModel.getMyLocation(getActivity(), map,binding.btnAnotherLocation);
 
-                  binding.btnAnotherLocation.setVisibility(View.VISIBLE);
-                  binding.btnMyLocation.setVisibility(View.VISIBLE);
-                  binding.btnMyLocation.setText(R.string.my_location);
+                binding.btnMyLocation.setVisibility(View.VISIBLE);
+                binding.btnMyLocation.setText(R.string.my_location);
 
 
-              }else {
-                  locationPermissionGranted = false;
-                  binding.btnMyLocation.setVisibility(View.VISIBLE);
-                  binding.btnMyLocation.setText(R.string.allow_location);
-
-              }
-          }
-
+            } else {
+                locationPermissionGranted = false;
+                binding.btnMyLocation.setVisibility(View.VISIBLE);
+                binding.btnMyLocation.setText(R.string.allow_location);
 
             }
-
-    private void goToResult(LatLng latLng , View view){
-
-        if (isNetworkAvailable(getActivity())){
-
-            Bundle bundle = new Bundle();
-            bundle.putDouble("latitude",latLng.latitude);
-            bundle.putDouble("longitude",latLng.longitude);
-            Navigation.findNavController(view).navigate(R.id.action_mapFragment_to_descriptionragment, bundle);
-        }else {
-
-            binding.liNoIntenet.setVisibility(View.VISIBLE);
         }
-
 
 
     }
 
 
+    private void goToResult(LatLng latLng, View view) {
+
+        if (isNetworkAvailable(getActivity())) {
+
+            Bundle bundle = new Bundle();
+            bundle.putDouble("latitude", latLng.latitude);
+            bundle.putDouble("longitude", latLng.longitude);
+            Navigation.findNavController(view).navigate(R.id.action_mapFragment_to_descriptionragment, bundle);
+        } else {
+
+            binding.liNoIntenet.setVisibility(View.VISIBLE);
+        }
+
+
+    }
 
     @Override
     public void onStart( ) {
@@ -182,6 +168,16 @@ public class MapFragment extends Fragment {
             binding.liSave.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+
+        if (locationPermissionGranted) {
+            viewModel.getMyLocation(getActivity(), map, binding.btnAnotherLocation);
+        } else {
+            getLocationPermission();
+        }
+    }
 }
-//
 

@@ -1,5 +1,5 @@
 
-package com.abdallah.weathery.model.weather_info;
+package com.abdallah.weathery.model.remote;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

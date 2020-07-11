@@ -4,11 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 import com.abdallah.weathery.database.AppDatabase;
-import com.abdallah.weathery.model.weather_local_room.Weather;
+import com.abdallah.weathery.model.local.WeatherLocal;
 import java.util.List;
 
 import static com.abdallah.weathery.utils.Constant.DATABASE_NAME;
@@ -16,7 +15,7 @@ import static com.abdallah.weathery.utils.Constant.DATABASE_NAME;
 public class SavedWeatherViewModel extends ViewModel {
 
     @SuppressLint("CheckResult")
-    public LiveData<List<Weather>> getMyWeather(Context context) {
+    public LiveData<List<WeatherLocal>> getMyWeather(Context context) {
 
 
         AppDatabase db = Room.databaseBuilder(context,

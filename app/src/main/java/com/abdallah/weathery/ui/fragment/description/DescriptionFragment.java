@@ -1,6 +1,5 @@
 package com.abdallah.weathery.ui.fragment.description;
 
-import androidx.annotation.MainThread;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.preference.PreferenceManager;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +17,9 @@ import android.widget.Toast;
 
 import com.abdallah.weathery.R;
 import com.abdallah.weathery.databinding.DescriptionragmentFragmentBinding;
-import com.abdallah.weathery.model.weather_info.WeatherResponse;
 import com.abdallah.weathery.ui.activity.MainActivity;
 import com.abdallah.weathery.utils.PrefManager;
 import com.airbnb.lottie.LottieAnimationView;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import static com.abdallah.weathery.utils.Constant.CLEAR;
 import static com.abdallah.weathery.utils.Constant.CLOUDS;
@@ -35,6 +27,7 @@ import static com.abdallah.weathery.utils.Constant.EXTREME;
 import static com.abdallah.weathery.utils.Constant.RAIN;
 import static com.abdallah.weathery.utils.Constant.SNOW;
 import static com.abdallah.weathery.utils.Constant.STORM;
+import static com.abdallah.weathery.utils.StaticMethods.loadingDialog;
 
 public class DescriptionFragment extends Fragment {
 
@@ -42,15 +35,13 @@ public class DescriptionFragment extends Fragment {
     private DescriptionragmentFragmentBinding binding;
     private PrefManager prefManager ;
     private AlertDialog loadingDialog;
-    private MainActivity mainActivity ;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.descriptionragment_fragment, container, false);
-        mainActivity =(MainActivity) getActivity();
-        loadingDialog = mainActivity.loadingDialog();
+        loadingDialog = loadingDialog(getActivity());
         loadingDialog.cancel();
         prefManager = new PrefManager(getContext());
         return binding.getRoot();

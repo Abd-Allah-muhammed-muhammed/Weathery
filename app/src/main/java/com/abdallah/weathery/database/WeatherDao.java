@@ -2,26 +2,22 @@ package com.abdallah.weathery.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.abdallah.weathery.model.weather_local_room.Weather;
+import com.abdallah.weathery.model.local.WeatherLocal;
 
 
 import java.util.List;
 
-import io.reactivex.Single;
-
 @Dao
 public interface WeatherDao {
 
-    @Query("SELECT * FROM Weather")
-    LiveData<List<Weather>> getAll();
+    @Query("SELECT * FROM WeatherLocal")
+    LiveData<List<WeatherLocal>> getAll();
 
     @Insert
-    void insertAll(Weather... weathers);
+    void insertAll(WeatherLocal... weatherLocals);
 
-    @Delete
-    void delete(Weather weather);
+
 }

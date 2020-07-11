@@ -1,11 +1,19 @@
 package com.abdallah.weathery.utils;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
+
+import com.abdallah.weathery.R;
 
 public class StaticMethods {
 
@@ -47,5 +55,15 @@ public class StaticMethods {
         return false;
     }
 
+    public static AlertDialog loadingDialog(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        @SuppressLint("InflateParams")
+        View loadingDialogView = activity.getLayoutInflater().inflate(R.layout.loading_view, null);
+        builder.setView(loadingDialogView);
+        AlertDialog loadingDialog = builder.create();
+        assert loadingDialog.getWindow() != null;
+        loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        return loadingDialog;
+    }
 }

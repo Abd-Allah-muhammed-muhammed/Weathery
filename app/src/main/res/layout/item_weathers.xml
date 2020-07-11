@@ -5,7 +5,7 @@
 
         <variable
             name="data"
-            type="com.abdallah.weathery.model.weather_local_room.Weather" />
+            type="com.abdallah.weathery.model.local.WeatherLocal" />
     </data>
 
     <RelativeLayout
@@ -74,7 +74,7 @@
                 android:layout_marginStart="-15dp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:fontFamily="@font/helvet"
-                android:text=" ºC"
+                android:text=" ºF"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/_25ssp" />
 

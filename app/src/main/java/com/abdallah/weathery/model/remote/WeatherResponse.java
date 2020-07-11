@@ -1,7 +1,8 @@
 
-package com.abdallah.weathery.model.weather_info;
+package com.abdallah.weathery.model.remote;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -44,7 +45,7 @@ public class WeatherResponse {
     private Sys sys;
     @SerializedName("timezone")
     @Expose
-    private Integer timezone;
+    private Object timezone;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -131,11 +132,11 @@ public class WeatherResponse {
         this.sys = sys;
     }
 
-    public Integer getTimezone() {
+    public Object getTimezone() {
         return timezone;
     }
 
-    public void setTimezone(Integer timezone) {
+    public void setTimezone(Object timezone) {
         this.timezone = timezone;
     }
 

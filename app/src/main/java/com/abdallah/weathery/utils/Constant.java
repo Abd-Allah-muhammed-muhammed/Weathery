@@ -12,4 +12,5 @@ public class Constant {
     public static final String SNOW ="Snow";
     public static final String STORM ="Storm";
     public static final String DATABASE_NAME ="weathery";
+    public static final String Temperature ="Fahrenheit";
 }

@@ -11,4 +11,9 @@
     <string name="saved">Saved</string>
     <string name="allow_location">اAllow location permeation</string>
     <string name="click_to_return">click to return</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind_speed">wind speed</string>
+    <string name="humidity">humidity</string>
+    <string name="sunrise">sunrise</string>
+    <string name="sunset">sunset</string>
 </resources>
