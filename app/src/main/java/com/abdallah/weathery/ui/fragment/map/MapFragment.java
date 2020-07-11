@@ -146,11 +146,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void goToResult(LatLng latLng, View view) {
 
         if (isNetworkAvailable(getActivity())) {
-
-            Bundle bundle = new Bundle();
-            bundle.putDouble("latitude", latLng.latitude);
-            bundle.putDouble("longitude", latLng.longitude);
-            Navigation.findNavController(view).navigate(R.id.action_mapFragment_to_descriptionragment, bundle);
+            MapFragmentDirections.ActionMapFragmentToDescriptionragment action = MapFragmentDirections.actionMapFragmentToDescriptionragment(latLng);
+            Navigation.findNavController(view).navigate(action);
         } else {
 
             binding.liNoIntenet.setVisibility(View.VISIBLE);

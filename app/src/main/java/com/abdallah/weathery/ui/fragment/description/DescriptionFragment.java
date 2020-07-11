@@ -20,6 +20,7 @@ import com.abdallah.weathery.databinding.DescriptionragmentFragmentBinding;
 import com.abdallah.weathery.ui.activity.MainActivity;
 import com.abdallah.weathery.utils.PrefManager;
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.gms.maps.model.LatLng;
 
 import static com.abdallah.weathery.utils.Constant.CLEAR;
 import static com.abdallah.weathery.utils.Constant.CLOUDS;
@@ -33,7 +34,7 @@ public class DescriptionFragment extends Fragment {
 
     private DescriptionFragmentViewModel mViewModel;
     private DescriptionragmentFragmentBinding binding;
-    private PrefManager prefManager ;
+    private PrefManager prefManager;
     private AlertDialog loadingDialog;
 
 
@@ -58,25 +59,19 @@ public class DescriptionFragment extends Fragment {
     }
 
     private void getDataBundle( ) {
-        Bundle bundle = getArguments();
+        DescriptionFragmentArgs args = DescriptionFragmentArgs.fromBundle(getArguments());
 
-        if (bundle != null) {
-            double latitude = bundle.getDouble("latitude");
-            double longitude = bundle.getDouble("longitude");
+        LatLng latlng = args.getLatlng();
 
-            fetchData(latitude, longitude);
-        } else {
 
-            // if the data bundle is null or empty
-            Toast.makeText(getContext(), getString(R.string.try_again), Toast.LENGTH_SHORT).show();
-            getActivity().onBackPressed();
+        fetchData(latlng);
 
-        }
+
     }
 
-    private void fetchData(double latitude, double longitude) {
+    private void fetchData(LatLng latLng) {
         loadingDialog.show();
-        mViewModel.getweather(latitude, longitude)
+        mViewModel.getweather(latLng)
                 .observe(getViewLifecycleOwner(), response -> {
 
 
@@ -112,39 +107,46 @@ public class DescriptionFragment extends Fragment {
     private void checkForWeatherIcon(String main) {
         LottieAnimationView lottieView = binding.weatherAnimationView;
 
-        switch (main){
+        switch (main) {
 
-            case CLEAR : binding.iconTemp.setImageResource(R.drawable.ic_clear);
+            case CLEAR:
+                binding.iconTemp.setImageResource(R.drawable.ic_clear);
 
-            lottieView.setAnimation(R.raw.clear_day);
-            break;
-                  case CLOUDS : binding.iconTemp.setImageResource(R.drawable.ic_clouds);
+                lottieView.setAnimation(R.raw.clear_day);
+                break;
+            case CLOUDS:
+                binding.iconTemp.setImageResource(R.drawable.ic_clouds);
 
-                      lottieView.setAnimation(R.raw.cloudy_weather);
+                lottieView.setAnimation(R.raw.cloudy_weather);
 
-                      break;
-                  case SNOW : binding.iconTemp.setImageResource(R.drawable.ic_snow);
+                break;
+            case SNOW:
+                binding.iconTemp.setImageResource(R.drawable.ic_snow);
 
-                      lottieView.setAnimation(R.raw.snow_weather);
+                lottieView.setAnimation(R.raw.snow_weather);
 
-                      break;
-                  case STORM : binding.iconTemp.setImageResource(R.drawable.ic_storm);
+                break;
+            case STORM:
+                binding.iconTemp.setImageResource(R.drawable.ic_storm);
 
-                      lottieView.setAnimation(R.raw.storm_weather);
+                lottieView.setAnimation(R.raw.storm_weather);
 
-                      break;
-                  case EXTREME : binding.iconTemp.setImageResource(R.drawable.ic_extreme);
+                break;
+            case EXTREME:
+                binding.iconTemp.setImageResource(R.drawable.ic_extreme);
 
-                      lottieView.setAnimation(R.raw.broken_clouds);
+                lottieView.setAnimation(R.raw.broken_clouds);
 
-                      break;
-                  case RAIN : binding.iconTemp.setImageResource(R.drawable.ic_rain);
-                      lottieView.setAnimation(R.raw.rainy_weather);
+                break;
+            case RAIN:
+                binding.iconTemp.setImageResource(R.drawable.ic_rain);
+                lottieView.setAnimation(R.raw.rainy_weather);
 
-                      break;
+                break;
 
 
-            default:   binding.iconTemp.setImageResource(R.drawable.ic_clear);
+            default:
+                binding.iconTemp.setImageResource(R.drawable.ic_clear);
                 lottieView.setAnimation(R.raw.unknown);
 
 

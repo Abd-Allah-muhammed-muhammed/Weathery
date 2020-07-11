@@ -31,7 +31,9 @@
         android:id="@+id/descriptionragment"
         android:name="com.abdallah.weathery.ui.fragment.description.DescriptionFragment"
         android:label="descriptionragment_fragment"
-        tools:layout="@layout/descriptionragment_fragment" />
+        tools:layout="@layout/descriptionragment_fragment" >
+        <argument android:name="latlng" app:argType="com.google.android.gms.maps.model.LatLng" app:nullable="false"/>
+    </fragment>
     <fragment
         android:id="@+id/savedWeatherFragment"
         android:name="com.abdallah.weathery.ui.fragment.saved_weather.SavedWeatherFragment"

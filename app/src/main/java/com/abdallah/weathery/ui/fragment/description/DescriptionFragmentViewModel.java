@@ -10,6 +10,7 @@ package com.abdallah.weathery.ui.fragment.description;
         import com.abdallah.weathery.model.remote.WeatherResponse;
         import com.abdallah.weathery.model.local.WeatherLocal;
         import com.abdallah.weathery.network.RetrofitClass;
+        import com.google.android.gms.maps.model.LatLng;
 
         import java.text.SimpleDateFormat;
         import java.util.Date;
@@ -29,10 +30,9 @@ public class DescriptionFragmentViewModel extends ViewModel {
 
     MutableLiveData<WeatherResponse> data = new MutableLiveData<>();
 
-    public MutableLiveData<WeatherResponse> getweather(double lat, double lon) {
+    public MutableLiveData<WeatherResponse> getweather(LatLng latLng) {
 
-
-        RetrofitClass.getNetworkInstance().getWeather(lat, lon, MY_KEY_API, Temperature)
+        RetrofitClass.getNetworkInstance().getWeather(latLng.latitude, latLng.longitude, MY_KEY_API, Temperature)
                 .subscribeOn(io())
                 .observeOn(mainThread())
                 .subscribe(new SingleObserver<WeatherResponse>() {
